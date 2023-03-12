@@ -38,8 +38,10 @@ def bldd(folder_path):
     """
     all_shared_libraries = []
     for root, dirs, files in os.walk(folder_path):
+        print(f"{root} {dirs} {files}")
         for file in files:
             file_path = os.path.join(root, file)
+            print(f"{file_path} {lief.is_elf(file_path)}")
             if lief.is_elf(file_path):
                 shared_libraries = get_shared_libraries(file_path)
                 all_shared_libraries.extend(shared_libraries)
