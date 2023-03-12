@@ -18,6 +18,7 @@ def get_shared_libraries(file_path):
     binary = lief.parse(file_path)
     shared_libraries = []
     for library in binary.libraries:
+        print(library)
         try:
             if library.name:
                 shared_libraries.append(library.name)
