@@ -18,8 +18,11 @@ def get_shared_libraries(file_path):
     binary = lief.parse(file_path)
     shared_libraries = []
     for library in binary.libraries:
-        if library.name:
-            shared_libraries.append(library.name)
+        try:
+            if library.name:
+                shared_libraries.append(library.name)
+        except Exception as e:
+            continue
     return shared_libraries
 
 def bldd(folder_path):
@@ -61,6 +64,6 @@ if __name__ == '__main__':
     
     print(args.source)
     file_list = os.listdir(args.source)
-    print(file_list)
-    print(lief.is_elf(os.path.join(args.source, file_list[0])))
+    #print(file_list)
+    #print(lief.is_elf(os.path.join(args.source, file_list[0])))
     bldd(args.source)
